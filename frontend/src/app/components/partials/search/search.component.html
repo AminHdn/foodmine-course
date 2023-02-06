@@ -1,0 +1,8 @@
+<div>
+    <!-- #s is template reference : we can direct access to them every where inside your HTML file when you use it for a tag it will hold all the data about specific tag-->
+    <input #s type="text" placeholder="search Food Mine!" 
+    (Keyup.enter)="search(s.value)"
+    [value]="searchTerm"/>
+    <!-- (keyup.enter) we normally search with enter key so any time that press the enter key and release it this event should call search with value of s.value -->
+    <button (click)="search(s.value)">Search</button>
+</div>
