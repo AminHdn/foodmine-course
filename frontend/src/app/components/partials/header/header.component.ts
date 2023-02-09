@@ -15,13 +15,14 @@ constructor(cartService:CartService,private userService:UserService){
   cartService.getCartObservable().subscribe((newCart)=>{
     this.cartQuantity=newCart.totalCount;
   })
-  userService.userObservable.subscribe((newUser)=>{
+  this.userService.userObservable.subscribe((newUser)=>{
     this.user=newUser;
   })
 
 }
 logout(){
   this.userService.logout();
+  
 }
 get isAuth(){
   return this.user.token;

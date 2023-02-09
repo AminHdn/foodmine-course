@@ -9,41 +9,38 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
-loginForm!:FormGroup;
-isSubmitted=false;
-returnUrl='';
-constructor(private formBuilder:FormBuilder,private userService:UserService,private activatedRoute:ActivatedRoute,
-  private router:Router
-  ){}
+  loginForm!:FormGroup;
+  isSubmitted = false;
+  returnUrl = '';
+  constructor(private formBuilder: FormBuilder
+    , private userService:UserService,
+     private activatedRoute:ActivatedRoute,
+     private router:Router) { }
 
-ngOnInit():void{
-  this.loginForm=this.formBuilder.group({
-    email:['',[Validators.required,Validators.email]],//email form control
-    password:['',Validators.required]
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email:['', [Validators.required,Validators.email]],
+      password:['', Validators.required]
+    });
 
-  });
-  this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl; //snapshot is the  latest value of the activated route//query Params every things after ?
-  //so we are getting   returnUrl each time that  we come  to the login page component
-  //loginForm.controls.email
-  //fc.email
-}
+    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl;
+  }
 
-get fc(){
-  return this.loginForm.controls;
-}
+  get fc(){
+    return this.loginForm.controls;
+  }
 
-submit(){
-  this.isSubmitted=true;
-  if(this.loginForm.invalid) return;
+  submit(){
+    this.isSubmitted = true;
+    if(this.loginForm.invalid) return;
 
-
-
-  this.userService.login({email:this.fc.email.value,
-  password:this.fc.password.value}).subscribe(()=>{
-    this.router.navigateByUrl(this.returnUrl);
-  })
+    this.userService.login({email:this.fc.email.value,
+       password: this.fc.password.value}).subscribe(() => {
+         this.router.navigateByUrl(this.returnUrl);
+       });
+  }
 
 }
 
-}
+
  

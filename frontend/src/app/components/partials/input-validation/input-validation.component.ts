@@ -1,23 +1,26 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 const VALIDATORS_MESSAGES:any = {
-  required:'Should not be empty ',
-  email:'Email is not valid'
+  required:'Should not be empty',
+  email:'Email is not valid',
+  minlength: 'Field is too short',
+  notMatch: 'Password and Confirm does not match'
 }
+
 @Component({
   selector: 'input-validation',
   templateUrl: './input-validation.component.html',
   styleUrls: ['./input-validation.component.css']
 })
 export class InputValidationComponent implements OnInit,OnChanges{
-  ngOnChanges(changes: SimpleChanges): void {
-    this.checkValidation();
-  }
   @Input()
   control!:AbstractControl;//abstract control is a type of control that we used in HTML inside the validation so we  can pass them as input to the input validation component
   @Input()
   showErrorsWhen:boolean=true;
   errorMessages:string[]=[];
+  ngOnChanges(changes: SimpleChanges): void {
+    this.checkValidation();
+  }
   ngOnInit():void{
     this.control.statusChanges.subscribe(()=>{
       this.checkValidation();
