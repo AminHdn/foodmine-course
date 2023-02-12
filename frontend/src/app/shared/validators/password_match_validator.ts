@@ -6,7 +6,10 @@ export const PasswordsMatchValidator = (passwordControlName: string,
         const passwordControl =  form.get(passwordControlName);
         const confirmPasswordControl =  form.get(confirmPasswordControlName);
 
-        if(!passwordControl || !confirmPasswordControl) return;
+        if(!passwordControl || !confirmPasswordControl) {
+          return;
+        }
+      
 
         if(passwordControl.value !== confirmPasswordControl.value){
           confirmPasswordControl.setErrors({notMatch: true});

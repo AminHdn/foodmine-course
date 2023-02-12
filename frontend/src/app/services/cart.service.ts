@@ -46,6 +46,11 @@ export class CartService {
     return this.cartSubject.asObservable();
 
   }
+
+  getCart():Cart{
+    return this.cartSubject.value;//subject always keep the latest value
+  }
+
   private setCartToLocalStorage():void{
     this.cart.totalPrice=this.cart.items
     .reduce((prevSum,currentItem)=>prevSum + currentItem.price,0)//reduce function will start to call this method based on number of items that you have inside your item for example if you have two items this function will be called two times

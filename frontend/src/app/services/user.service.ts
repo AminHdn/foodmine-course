@@ -21,6 +21,11 @@ export class UserService {
     this.userObservable = this.userSubject.asObservable();
     //SO userObservable is a version of userSubject that can read only
    }
+  public get currentUser():User{
+   return this.userSubject.value;
+   }
+
+
    // the main difference between 
    login(userLogin:IUserLogin):Observable<User>{
     return this.http.post<User>(USER_LOGIN_URL,userLogin).pipe(
@@ -74,4 +79,6 @@ export class UserService {
     if(userJson) return JSON.parse(userJson) as User;
     return new User();
    }
+
+  
 }

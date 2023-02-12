@@ -31,7 +31,7 @@ ngOnInit(): void {
     confirmPassword:['',[Validators.required]],
     address:['',[Validators.required,Validators.minLength(10)]]
   },{
-    Validators:PasswordsMatchValidator('password','confirmPassword')
+    validators: PasswordsMatchValidator('password','confirmPassword')
   });
 
   this.returnUrl=this.activatedRoute.snapshot.queryParams.returnUrl;
