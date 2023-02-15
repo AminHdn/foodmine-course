@@ -27,9 +27,9 @@ router.get('/seed',asyncHandler(
 router.post('/login',asyncHandler(
     async (req,res)=>{
         const {email,password} = req.body;//in the body we have email and password so each one get own one//we called Destructuring Assignment
-        const user = await UserModel.findOne({email,password});
+        const user = await UserModel.findOne({email});
 
-            if(user){
+            if(user && (await bcrypt.compare(password,user.password))){
                 res.send(generateTokenResponse(user));
             }else{
                 res.status(HTTP_BAD_REQUEST).send("User name or password is not valid!");
@@ -64,7 +64,7 @@ router.post('/register',asyncHandler(
 
 const generateTokenResponse= (user:any)=>{
     const token =jwt.sign({
-        id:user.id, email:user.email,isAdmin:user.isAdmin},"SomeRandomText",{
+        id: user.id,email:user.email,isAdmin:user.isAdmin},"SomeRandomText",{
             expiresIn:"30d"
         });
      return {

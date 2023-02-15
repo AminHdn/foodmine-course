@@ -29,6 +29,9 @@ import { CheckoutPageComponent } from './components/pages/checkout-page/checkout
 import { OrderItemsListComponent } from './components/partials/order-items-list/order-items-list.component';
 import { MapComponent } from './components/partials/map/map.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { AuthInterceptor } from './auth/guards/auth.interceptor';
+import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
+import { PaypalButtonComponent } from './components/partials/paypal-button/paypal-button.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     LoadingComponent,
     CheckoutPageComponent,
     OrderItemsListComponent,
-    MapComponent
+    MapComponent,
+    PaymentPageComponent,
+    PaypalButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +73,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
   ],
   providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
     {provide:HTTP_INTERCEPTORS,useClass:LoadingInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
