@@ -20,6 +20,9 @@ app.use(cors({
     credentials:true,
     origin:["http://localhost:4200"]
 }));
+app.get('/people', function (req, res) {
+    res.send('hello');
+})
 
 app.use(express.static('frontend'));
 
