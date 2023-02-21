@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
+import path from 'path';
 
 
 import express from 'express';
@@ -20,17 +21,20 @@ app.use(cors({
     credentials:true,
     origin:["http://localhost:4200"]
 }));
-app.get('/people', function (req, res) {
-    res.send('hello');
-})
+// app.get('/people', function (req, res) {
+//     res.send('hello');
+// })
 
-app.use(express.static('frontend'));
+// app.use(express.static('frontend'));
 
 app.use("/api/foods",foodRouter);
 app.use("/api/users",userRouter);
 app.use("/api/orders",orderRouter);
 
-
+app.use(express.static('public'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname,'public', 'index.html'))
+})
 const port =5000;
 app.listen(port,()=>{
     console.log("website served on http://localhost:"+port);
