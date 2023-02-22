@@ -1,14 +1,13 @@
 {
   "name": "foodmine-course",
   "version": "1.0.0",
-  "engines": {
-    "node": ">=14 <15"
-  },
   "scripts": {
     "start": "cd backend/built && node server.js",
     "prebuild": "cd backend && npm run build",
     "build": "cd frontend && npm run build"
-    
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.9.3"
   }
- 
 }

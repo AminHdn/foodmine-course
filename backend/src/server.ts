@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'; 
 import dotenv from 'dotenv';
 dotenv.config();
 import path from 'path';
@@ -20,12 +21,19 @@ app.use("/api/foods", foodRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 
-app.use(express.static('frontend'));
+app.use(express.static('public'));
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname,'frontend', 'index.html'))
+    res.sendFile(path.join(__dirname, 'index.html'))
 })
 
 const port = process.env.PORT || 5000;
+
+
 app.listen(port, () => {
     console.log("Website served on http://localhost:" + port);
 })
+// const url = process.env.MONGO_URL
+// mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+// .then(() => app.listen(PORT, () => console.log("Server up and running!")
+// .catch((error) => console.log(error.message) 
+// mongoose.set('useFindAndModify', false)
